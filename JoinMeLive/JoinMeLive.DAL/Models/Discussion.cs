@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
+using Newtonsoft.Json;
+
 namespace JoinMeLive.DAL.Models
 {
     /// <summary>
@@ -40,8 +42,10 @@ namespace JoinMeLive.DAL.Models
         [ForeignKey("Category")]
         public long CategoryId { get; set; }
 
+        [JsonIgnore]
         public virtual Category Category { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<Tag> Tags { get; set; } = new HashSet<Tag>();
     }
 }

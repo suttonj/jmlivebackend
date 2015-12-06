@@ -2,8 +2,6 @@
 
 using JoinMeLive.DAL.Models;
 
-using SQLite.CodeFirst;
-
 namespace JoinMeLive.DAL
 {
     /// <summary>
@@ -16,7 +14,7 @@ namespace JoinMeLive.DAL
 
         public DbSet<Tag> Tags { get; set; }
 
-        public DbSet<Discussion> Topics { get; set; }
+        public DbSet<Discussion> Discussions { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

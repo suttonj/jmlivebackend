@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Data;
+
+using Newtonsoft.Json;
 
 namespace JoinMeLive.DAL.Models
 {
@@ -29,6 +30,7 @@ namespace JoinMeLive.DAL.Models
         /// <summary>
         /// Favorited Tags
         /// </summary>
+        [JsonIgnore]
         public virtual ICollection<Tag> Tags { get; set; } = new HashSet<Tag>();
     }
 }
