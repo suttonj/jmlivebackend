@@ -8,11 +8,12 @@ namespace JoinMeLive.DAL.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        public Guid Id { get; set; }
+        public long Id { get; set; }
 
         [ForeignKey("ParentCategory")]
-        public Guid? ParentCategoryId { get; set; }
+        public long? ParentCategoryId { get; set; }
 
+        [Required]
         public string Name { get; set; }
 
         public virtual Category ParentCategory { get; set; }

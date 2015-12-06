@@ -27,7 +27,7 @@ namespace JoinMeLive.Controllers
         /// <param name="categoryName">Category name</param>
         /// <param name="parentCategoryId">(optional) parent category id</param>
         /// <returns></returns>
-        public IHttpActionResult Insert(string categoryName, Guid? parentCategoryId = null)
+        public IHttpActionResult Insert(string categoryName, long? parentCategoryId = null)
         {
             Category category = this.categoryHelper.Insert(categoryName, parentCategoryId);
 

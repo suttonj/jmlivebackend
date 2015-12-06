@@ -18,7 +18,7 @@ namespace JoinMeLive.Helpers.Implementations
             this.liveContext = liveContext;
         }
 
-        public IEnumerable<Discussion> List(Guid categoryId)
+        public IEnumerable<Discussion> List(long categoryId)
         {
             List<Discussion> topics = this.liveContext.Topics.Where(x => x.CategoryId == categoryId).ToList();
             return topics;

@@ -2,6 +2,8 @@
 
 using JoinMeLive.DAL.Models;
 
+using SQLite.CodeFirst;
+
 namespace JoinMeLive.DAL
 {
     /// <summary>
@@ -18,7 +20,8 @@ namespace JoinMeLive.DAL
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            //var sqliteConnectionInitializer = new SqliteCreateDatabaseIfNotExists<LiveContext>(modelBuilder);
+            //Database.SetInitializer(sqliteConnectionInitializer);
         }
     }
 }

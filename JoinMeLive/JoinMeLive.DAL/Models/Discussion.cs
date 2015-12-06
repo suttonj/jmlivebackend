@@ -15,7 +15,7 @@ namespace JoinMeLive.DAL.Models
         /// </summary>
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        public Guid Id { get; set; }
+        public long Id { get; set; }
 
         /// <summary>
         /// User specified subject for this discussion
@@ -26,8 +26,10 @@ namespace JoinMeLive.DAL.Models
         /// <summary>
         /// join.me Viewer Code (Populated when the discussion is started)
         /// </summary>
+        [Required]
         public long ViewerCode { get; set; }
 
+        [Required]
         public DateTime Start { get; set; }
 
         public DateTime? End { get; set; }
@@ -36,7 +38,7 @@ namespace JoinMeLive.DAL.Models
         /// Lowest level category
         /// </summary>
         [ForeignKey("Category")]
-        public Guid CategoryId { get; set; }
+        public long CategoryId { get; set; }
 
         public virtual Category Category { get; set; }
 

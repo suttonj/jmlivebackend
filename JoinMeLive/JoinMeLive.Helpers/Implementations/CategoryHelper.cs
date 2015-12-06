@@ -16,13 +16,13 @@ namespace JoinMeLive.Helpers.Implementations
             this.liveContext = liveContext;
         }
 
-        public IEnumerable<Category> List(Guid? parentCategoryId = null)
+        public IEnumerable<Category> List(long? parentCategoryId = null)
         {
             List<Category> categories = this.liveContext.Categories.Where(x => x.ParentCategoryId == parentCategoryId).ToList();
             return categories;
         }
         
-        public Category Insert(string categoryName, Guid? parentCategoryId = null)
+        public Category Insert(string categoryName, long? parentCategoryId = null)
         {
             // Category name must be unique under parent.
             Category existingCategory = this.liveContext.Categories.FirstOrDefault(x => x.ParentCategoryId == parentCategoryId && x.Name == categoryName);

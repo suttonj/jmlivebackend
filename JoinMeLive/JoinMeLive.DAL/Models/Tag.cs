@@ -10,7 +10,7 @@ namespace JoinMeLive.DAL.Models
         [Index("IdAndNameIndex", 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        public Guid Id { get; set; }
+        public long Id { get; set; }
 
         [Required]
         [Index("NameIndex")]

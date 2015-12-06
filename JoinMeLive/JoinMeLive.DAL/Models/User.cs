@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data;
 
 namespace JoinMeLive.DAL.Models
 {
@@ -9,7 +10,7 @@ namespace JoinMeLive.DAL.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
-        public Guid Id { get; set; }
+        public long Id { get; set; }
 
         public string DisplayName { get; set; }
         
@@ -22,6 +23,7 @@ namespace JoinMeLive.DAL.Models
         /// <summary>
         /// join.me Login
         /// </summary>
+        [Required]
         public string Login { get; set; }
 
         /// <summary>

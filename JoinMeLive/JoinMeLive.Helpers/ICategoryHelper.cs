@@ -13,7 +13,7 @@ namespace JoinMeLive.Helpers
         /// <param name="categoryName">Name for the desired category - should be unique under the parent category id</param>
         /// <param name="parentCategoryId">Parent category. Can be null for top level categories.</param>
         /// <returns></returns>
-        Category Insert(string categoryName, Guid? parentCategoryId = null);
+        Category Insert(string categoryName, long? parentCategoryId = null);
 
         /// <summary>
         /// Get a list of all categories directly under the specified category.
@@ -21,6 +21,6 @@ namespace JoinMeLive.Helpers
         /// </summary>
         /// <param name="parentCategoryId">The parent category, if desired. (optional) default: null</param>
         /// <returns>List of categories</returns>
-        IEnumerable<Category> List(Guid? parentCategoryId = null);
+        IEnumerable<Category> List(long? parentCategoryId = null);
     }
 }
