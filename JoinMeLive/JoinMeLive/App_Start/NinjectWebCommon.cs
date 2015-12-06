@@ -1,9 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Http;
-using System.Web.Http.Dependencies;
 
 using JoinMeLive;
 using JoinMeLive.DAL;
@@ -13,11 +10,7 @@ using JoinMeLive.Helpers.Implementations;
 using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 
 using Ninject;
-using Ninject.Activation;
-using Ninject.Parameters;
-using Ninject.Syntax;
 using Ninject.Web.Common;
-using Ninject.Web.WebApi;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(NinjectWebCommon), "Stop")]
@@ -58,9 +51,10 @@ namespace JoinMeLive
                 kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
 
-                GlobalConfiguration.Configuration.DependencyResolver = new NinjectDependencyResolver(kernel);
-
                 RegisterServices(kernel);
+
+                // Install our Ninject-based IDependencyResolver into the Web API config
+                GlobalConfiguration.Configuration.DependencyResolver = new NinjectDependencyResolver(kernel);
 
                 return kernel;
             }

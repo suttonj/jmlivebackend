@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity;
 
 using JoinMeLive.DAL.Models;
 
@@ -12,6 +7,7 @@ namespace JoinMeLive.DAL
     /// <summary>
     /// join.me Live Database Context
     /// </summary>
+    [DbConfigurationType(typeof(LiveDbConfiguration))]
     public class LiveContext : DbContext
     {
         public DbSet<Category> Categories { get; set; }

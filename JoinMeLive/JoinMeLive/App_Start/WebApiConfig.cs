@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
-
-using Ninject.Web.Common;
-using Ninject.Web.WebApi;
+﻿using System.Web.Http;
 
 namespace JoinMeLive
 {
