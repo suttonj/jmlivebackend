@@ -46,7 +46,10 @@ namespace JoinMeLive.Helpers.Implementations
 
             // TODO: Order by most popular?
             discussions = discussions.OrderBy(x => x.Id).Skip(startResult ?? 0);
-            discussions = discussions.Take(maxResults ?? -1);
+            if (maxResults.HasValue)
+            {
+                discussions = discussions.Take(maxResults.Value);
+            }
 
             return discussions.ToList();
         }

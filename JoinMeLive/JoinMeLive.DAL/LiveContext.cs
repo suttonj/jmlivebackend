@@ -7,7 +7,7 @@ namespace JoinMeLive.DAL
     /// <summary>
     /// join.me Live Database Context
     /// </summary>
-    [DbConfigurationType(typeof(LiveDbConfiguration))]
+    //[DbConfigurationType(typeof(LiveDbConfiguration))]
     public class LiveContext : DbContext
     {
         public DbSet<Category> Categories { get; set; }
