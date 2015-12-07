@@ -1,10 +1,12 @@
 ﻿using System.Web.Http;
+using System.Web.Http.Cors;
 
 using JoinMeLive.DAL.Models;
 using JoinMeLive.Helpers;
 
 namespace JoinMeLive.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class TagController : ApiController
     {
         private readonly ITagHelper tagHelper;

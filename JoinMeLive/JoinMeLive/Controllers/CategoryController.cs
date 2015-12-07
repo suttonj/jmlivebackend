@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 using JoinMeLive.DAL.Models;
 using JoinMeLive.Helpers;
@@ -9,6 +10,7 @@ namespace JoinMeLive.Controllers
     /// <summary>
     /// Categories
     /// </summary>
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class CategoryController : ApiController
     {
         private readonly ICategoryHelper categoryHelper;

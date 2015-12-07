@@ -19,7 +19,7 @@ namespace JoinMeLive.DAL.Models
 
         public string SelfSummary { get; set; }
 
-        public DateTime LastLogin { get; set; }
+        public DateTime? LastLogin { get; set; }
 
         /// <summary>
         /// join.me Login

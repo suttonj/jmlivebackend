@@ -56,6 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\DiscussionExtensions.cs" />
+    <Compile Include="Extensions\RandomExtensions.cs" />
     <Compile Include="Extensions\TagExtensions.cs" />
     <Compile Include="LiveContext.cs" />
     <Compile Include="LiveDbConfiguration.cs" />
@@ -66,6 +67,10 @@
     <Compile Include="Migrations\201512071939473_participantcount.cs" />
     <Compile Include="Migrations\201512071939473_participantcount.Designer.cs">
       <DependentUpon>201512071939473_participantcount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201512072213383_UsersAdded.cs" />
+    <Compile Include="Migrations\201512072213383_UsersAdded.Designer.cs">
+      <DependentUpon>201512072213383_UsersAdded.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
@@ -84,6 +89,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201512071939473_participantcount.resx">
       <DependentUpon>201512071939473_participantcount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512072213383_UsersAdded.resx">
+      <DependentUpon>201512072213383_UsersAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -51,6 +51,7 @@ namespace JoinMeLive.Helpers.Implementations
                              };
 
             this.liveContext.Tags.Add(newTag);
+            this.liveContext.SaveChanges();
 
             return newTag;
         }

@@ -1,16 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 using JoinMeLive.DAL.Models;
 using JoinMeLive.Helpers;
 
 namespace JoinMeLive.Controllers
 {
-    public class DiscusssionController : ApiController
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
+    public class DiscussionController : ApiController
     {
         private readonly IDiscussionHelper discussionHelper;
 
-        public DiscusssionController(IDiscussionHelper discussionHelper)
+        public DiscussionController(IDiscussionHelper discussionHelper)
         {
             this.discussionHelper = discussionHelper;
         }

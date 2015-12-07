@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
+using JoinMeLive.DAL.Extensions;
+
 using Newtonsoft.Json;
 
 namespace JoinMeLive.DAL.Models
@@ -43,6 +45,9 @@ namespace JoinMeLive.DAL.Models
         public long CategoryId { get; set; }
 
         public int? ParticipantCount { get; set; }
+
+        [NotMapped]
+        public string PreviewImageUrl => $"http://lorempixel.com/200/200/?{new Random().RandomString(10)}";
 
         [JsonIgnore]
         public virtual Category Category { get; set; }
