@@ -42,6 +42,8 @@ namespace JoinMeLive.DAL.Models
         [ForeignKey("Category")]
         public long CategoryId { get; set; }
 
+        public int? ParticipantCount { get; set; }
+
         [JsonIgnore]
         public virtual Category Category { get; set; }
 

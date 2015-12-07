@@ -37,7 +37,7 @@ namespace JoinMeLive.Controllers
         /// <param name="maxResults">(optional) limit results to the given amount</param>
         /// <param name="startResult">(optional) for paging - skip results before returning list</param>
         /// <param name="q">(optional) query filter on discussion name</param>
-        /// <returns></returns>
+        /// <returns>List of discussions</returns>
         [HttpGet]
         public IHttpActionResult List(
             long? categoryId = null,
@@ -58,15 +58,17 @@ namespace JoinMeLive.Controllers
         /// <param name="viewerCode">join.me viewer code used to join the discussion</param>
         /// <param name="categoryId">Lowest level category for the duscission</param>
         /// <param name="tagIds">(optional) comma seperated tag ids to use for the discussion</param>
-        /// <returns></returns>
+        /// <param name="participantCount">the count of participants - this is for inserting test data</param>
+        /// <returns>The newly created discussion</returns>
         [HttpPost]
         public IHttpActionResult Insert(
             string subject,
             long viewerCode,
             long categoryId,
-            string tagIds = null)
+            string tagIds = null,
+            int? participantCount = null)
         {
-            Discussion discussion = this.discussionHelper.Insert(subject, viewerCode, categoryId, StringToLongList(tagIds));
+            Discussion discussion = this.discussionHelper.Insert(subject, viewerCode, categoryId, this.StringToLongList(tagIds), participantCount);
 
             return this.Ok(discussion);
         }

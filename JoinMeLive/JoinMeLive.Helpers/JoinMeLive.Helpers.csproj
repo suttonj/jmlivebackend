@@ -53,6 +53,8 @@
     <Compile Include="Implementations\CategoryHelper.cs" />
     <Compile Include="Implementations\DiscussionHelper.cs" />
     <Compile Include="IDiscussionHelper.cs" />
+    <Compile Include="Implementations\TagHelper.cs" />
+    <Compile Include="ITagHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -38,7 +38,7 @@ namespace JoinMeLive.Controllers
         /// Get a list of existing categories
         /// </summary>
         /// <param name="parentCategoryId">(optional) parent category id</param>
-        /// <returns></returns>
+        /// <returns>List of categories</returns>
         [HttpGet]
         public IHttpActionResult List(long? parentCategoryId = null)
         {
@@ -52,7 +52,7 @@ namespace JoinMeLive.Controllers
         /// </summary>
         /// <param name="categoryName">Category name</param>
         /// <param name="parentCategoryId">(optional) parent category id</param>
-        /// <returns></returns>
+        /// <returns>The newly created category</returns>
         [HttpPost]
         public IHttpActionResult Insert(string categoryName, long? parentCategoryId = null)
         {

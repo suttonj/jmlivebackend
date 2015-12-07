@@ -70,7 +70,7 @@ namespace JoinMeLive.Helpers.Implementations
                 throw new ArgumentException($"Category name must be unique under the given parent category. A category {existingCategory.Name} already exists");
             }
 
-            Category newCategory = new Category() { Name = categoryName, ParentCategoryId = parentCategoryId };
+            Category newCategory = new Category { Name = categoryName, ParentCategoryId = parentCategoryId };
 
             this.liveContext.Categories.Add(newCategory);
             this.liveContext.SaveChanges();

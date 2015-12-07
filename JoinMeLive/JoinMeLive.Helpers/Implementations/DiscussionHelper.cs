@@ -54,7 +54,7 @@ namespace JoinMeLive.Helpers.Implementations
             return discussions.ToList();
         }
 
-        public Discussion Insert(string subject, long viewerCode, long categoryId, IEnumerable<long> tagIds = null)
+        public Discussion Insert(string subject, long viewerCode, long categoryId, IEnumerable<long> tagIds = null, int? participantCount = null)
         {
             if (string.IsNullOrWhiteSpace(subject))
             {
@@ -66,7 +66,8 @@ namespace JoinMeLive.Helpers.Implementations
                                             CategoryId = categoryId,
                                             Start = DateTime.UtcNow,
                                             Subject = subject,
-                                            ViewerCode = viewerCode
+                                            ViewerCode = viewerCode,
+                                            ParticipantCount = participantCount
                                         };
 
             // Get tags
