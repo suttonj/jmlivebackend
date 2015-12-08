@@ -12,8 +12,10 @@ namespace JoinMeLive.DAL.Models
     /// <summary>
     /// Represents a discussion
     /// </summary>
-    public class Discussion
+    public class Discussion : IIdsEqual<Discussion>
     {
+        private static Random random = new Random();
+
         /// <summary>
         /// Uniquely identifies this Topic
         /// </summary>
@@ -46,13 +48,16 @@ namespace JoinMeLive.DAL.Models
 
         public int? ParticipantCount { get; set; }
 
-        [NotMapped]
-        public string PreviewImageUrl => $"http://lorempixel.com/200/200/?{new Random().RandomString(10)}";
+        public string PreviewImageUrl { get; set; } = $"http://lorempixel.com/200/200/?{random.RandomString(10)}";
 
         [JsonIgnore]
         public virtual Category Category { get; set; }
 
-        [JsonIgnore]
         public virtual ICollection<Tag> Tags { get; set; } = new HashSet<Tag>();
+
+        public bool IdsEqual(Discussion other)
+        {
+            return other.Id == this.Id;
+        }
     }
 }

@@ -4,6 +4,7 @@ using System.Web.Http.Cors;
 
 using JoinMeLive.DAL.Models;
 using JoinMeLive.Helpers;
+using JoinMeLive.Models;
 
 namespace JoinMeLive.Controllers
 {
@@ -52,13 +53,15 @@ namespace JoinMeLive.Controllers
         /// <summary>
         /// Insert a new category
         /// </summary>
-        /// <param name="categoryName">Category name</param>
-        /// <param name="parentCategoryId">(optional) parent category id</param>
+        /// <param name="model">
+        /// categoryName - Category name
+        /// parentCategoryId - (optional) parent category id
+        /// </param>
         /// <returns>The newly created category</returns>
         [HttpPost]
-        public IHttpActionResult Insert(string categoryName, long? parentCategoryId = null)
+        public IHttpActionResult Insert([FromBody] InsertCategoryModel model)
         {
-            Category category = this.categoryHelper.Insert(categoryName, parentCategoryId);
+            Category category = this.categoryHelper.Insert(model.CategoryName, model.ParentCategoryId);
 
             return this.Ok(category);
         }

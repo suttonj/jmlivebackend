@@ -55,8 +55,10 @@
     <Compile Include="IDiscussionHelper.cs" />
     <Compile Include="Implementations\TagHelper.cs" />
     <Compile Include="Implementations\UserHelper.cs" />
+    <Compile Include="Implementations\UserTagHelper.cs" />
     <Compile Include="ITagHelper.cs" />
     <Compile Include="IUserHelper.cs" />
+    <Compile Include="IUserTagHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

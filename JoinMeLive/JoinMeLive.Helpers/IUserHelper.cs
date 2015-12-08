@@ -7,5 +7,7 @@ namespace JoinMeLive.Helpers
         User Get(long userId);
 
         User Insert(string displayName, string photoUrl, string selfSummary, string login);
+
+        User Update(long userId, string displayName, string photoUrl, string selfSummary);
     }
 }

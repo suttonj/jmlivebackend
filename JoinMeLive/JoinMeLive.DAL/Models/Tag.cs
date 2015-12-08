@@ -16,6 +16,6 @@ namespace JoinMeLive.DAL.Models
         public string Name { get; set; }
 
         [JsonIgnore]
-        public virtual ICollection<Discussion> Topics { get; set; }
+        public virtual ICollection<Discussion> Discussions { get; set; }
     }
 }

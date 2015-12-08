@@ -17,18 +17,56 @@ namespace JoinMeLive.Helpers.Implementations
             this.liveContext = liveContext;
         }
 
-        public IEnumerable<Tag> List(int? maxResults = null, int? startResult = null, string q = null)
+        public Tag Get(long tagId)
         {
-            var tags = this.liveContext.Tags.FilterByName(q);
+            var tag = this.liveContext.Tags.SingleOrDefault(x => x.Id == tagId);
 
-            // TODO: Order by ?
-            tags = tags.OrderBy(x => x.Id).Skip(startResult ?? 0);
-            if (maxResults.HasValue)
+            if (tag == null)
             {
-                tags = tags.Take(maxResults.Value);
+                throw new ArgumentException("There is no tag with the id given");
             }
 
-            return tags.ToList();
+            return tag;
+        }
+
+        public IEnumerable<Tag> GetOrInsertTags(IEnumerable<string> tagNames)
+        {
+            List<Tag> finalTags = new List<Tag>();
+
+            var existingTags = this.liveContext.Tags.Where(x => tagNames.Contains(x.Name));
+            var existingNames = existingTags.Select(x => x.Name);
+
+            finalTags.AddRange(existingTags);
+
+            var tagsToAdd = tagNames.Where(x => !existingNames.Contains(x)).ToArray();
+
+            if (!tagsToAdd.Any())
+            {
+                return finalTags;
+            }
+
+            // Add new tags
+            foreach (var newTagName in tagsToAdd)
+            {
+                Tag newTag = new Tag { Name = newTagName };
+
+                this.liveContext.Tags.Add(newTag);
+                finalTags.Add(newTag);
+            }
+
+            this.liveContext.SaveChanges();
+
+            return finalTags;
+        }
+
+        public IEnumerable<Tag> GetTagsById(IEnumerable<long> tagIds)
+        {
+            if (tagIds == null)
+            {
+                return new Tag[0];
+            }
+
+            return this.liveContext.Tags.Where(x => tagIds.Contains(x.Id));
         }
 
         public Tag Insert(string tagName)
@@ -46,14 +84,28 @@ namespace JoinMeLive.Helpers.Implementations
             }
 
             Tag newTag = new Tag
-                             {
-                                 Name = tagName
-                             };
+            {
+                Name = tagName
+            };
 
             this.liveContext.Tags.Add(newTag);
             this.liveContext.SaveChanges();
 
             return newTag;
+        }
+
+        public IEnumerable<Tag> List(int? maxResults = null, int? startResult = null, string q = null)
+        {
+            var tags = this.liveContext.Tags.FilterByName(q);
+
+            // TODO: Order by ?
+            tags = tags.OrderBy(x => x.Id).Skip(startResult ?? 0);
+            if (maxResults.HasValue)
+            {
+                tags = tags.Take(maxResults.Value);
+            }
+
+            return tags.ToList();
         }
     }
 }

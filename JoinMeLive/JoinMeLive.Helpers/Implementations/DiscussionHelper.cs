@@ -12,9 +12,12 @@ namespace JoinMeLive.Helpers.Implementations
     {
         private readonly LiveContext liveContext;
 
-        public DiscussionHelper(LiveContext liveContext)
+        private readonly ITagHelper tagHelper;
+
+        public DiscussionHelper(LiveContext liveContext, ITagHelper tagHelper)
         {
             this.liveContext = liveContext;
+            this.tagHelper = tagHelper;
         }
 
         public void Delete(long discussionId)
@@ -54,7 +57,19 @@ namespace JoinMeLive.Helpers.Implementations
             return discussions.ToList();
         }
 
-        public Discussion Insert(string subject, long viewerCode, long categoryId, IEnumerable<long> tagIds = null, int? participantCount = null)
+        public Discussion Insert(string subject, long viewerCode, long categoryId, string previewImageUrl = null, IEnumerable<long> tagIds = null, int? participantCount = null)
+        {
+            if (string.IsNullOrWhiteSpace(subject))
+            {
+                throw new ArgumentException("Subject must be specified");
+            }
+
+            var tags = this.tagHelper.GetTagsById(tagIds);
+
+            return this.Insert(subject, viewerCode, categoryId, previewImageUrl, tags, participantCount);
+        }
+
+        public Discussion Insert(string subject, long viewerCode, long categoryId, string previewImageUrl = null, IEnumerable<Tag> tags = null, int? participantCount = null)
         {
             if (string.IsNullOrWhiteSpace(subject))
             {
@@ -62,21 +77,31 @@ namespace JoinMeLive.Helpers.Implementations
             }
 
             Discussion discussion = new Discussion
-                                        {
-                                            CategoryId = categoryId,
-                                            Start = DateTime.UtcNow,
-                                            Subject = subject,
-                                            ViewerCode = viewerCode,
-                                            ParticipantCount = participantCount
-                                        };
+            {
+                CategoryId = categoryId,
+                Start = DateTime.UtcNow,
+                Subject = subject,
+                ViewerCode = viewerCode,
+                PreviewImageUrl = previewImageUrl,
+                ParticipantCount = participantCount
+            };
 
             // Get tags
-            if (tagIds != null)
+            if (tags != null)
             {
-                discussion.Tags = this.liveContext.Tags.Where(x => tagIds.Contains(x.Id)).ToList();
+                discussion.Tags = tags.ToList();
             }
 
             this.liveContext.Discussions.Add(discussion);
+            this.liveContext.SaveChanges();
+
+            return discussion;
+        }
+
+        public Discussion Update(Discussion discussion)
+        {
+            this.liveContext.SetAsModified(discussion);
+
             this.liveContext.SaveChanges();
 
             return discussion;

@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Http;
+﻿using System.Web.Http;
 using System.Web.Http.Cors;
 
 using JoinMeLive.DAL.Models;
 using JoinMeLive.Helpers;
+using JoinMeLive.Models;
 
 namespace JoinMeLive.Controllers
 {
@@ -35,17 +31,37 @@ namespace JoinMeLive.Controllers
         }
 
         /// <summary>
-        /// Insert a new user into the system.
+        /// Inserts a new user into the system.
         /// </summary>
-        /// <param name="login">The user's join.me login</param>
-        /// <param name="displayName">(optional) display name for the user on join.me live</param>
-        /// <param name="photoUrl">(optional) url to a photo of the user</param>
-        /// <param name="selfSummary">(optional) user self-summary to show on profile</param>
+        /// <param name="insertUserModel">
+        /// login (required) - the user's join.me login.
+        /// displayName - (optional) display name for the user on join.me live
+        /// photoUrl - (optional) url to a photo of the user
+        /// selfSummary - (optional) user self-summary to show on profile
+        /// </param>
         /// <returns>Newly inserted user</returns>
         [HttpPost]
-        public IHttpActionResult Insert(string login, string displayName, string photoUrl, string selfSummary)
+        public IHttpActionResult Insert([FromBody] InsertUserModel insertUserModel)
         {
-            User user = this.userHelper.Insert(displayName, photoUrl, selfSummary, login);
+            User user = this.userHelper.Insert(insertUserModel.DisplayName, insertUserModel.PhotoUrl, insertUserModel.SelfSummary, insertUserModel.Login);
+
+            return this.Ok(user);
+        }
+
+        /// <summary>
+        /// Update something about a user
+        /// </summary>
+        /// /// <param name="updateUserModel">
+        /// userId - The user id of the user to update
+        /// displayName - (optional) new display name for the user
+        /// photoUrl - (optional) new photo url for the user
+        /// selfSummary - (optional) new self summary for the user
+        /// </param>
+        /// <returns>Newly inserted user</returns>
+        [HttpPatch]
+        public IHttpActionResult Update([FromBody] UpdateUserModel updateUserModel)
+        {
+            User user = this.userHelper.Update(updateUserModel.UserId, updateUserModel.DisplayName, updateUserModel.PhotoUrl, updateUserModel.SelfSummary);
 
             return this.Ok(user);
         }

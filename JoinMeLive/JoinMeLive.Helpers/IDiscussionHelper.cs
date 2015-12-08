@@ -19,6 +19,10 @@ namespace JoinMeLive.Helpers
             int? startResult = null,
             string q = null);
 
-        Discussion Insert(string subject, long viewerCode, long categoryId, IEnumerable<long> tagIds = null, int? participantCount = null);
+        Discussion Insert(string subject, long viewerCode, long categoryId, string previewImageUrl = null, IEnumerable<long> tagIds = null, int? participantCount = null);
+
+        Discussion Insert(string subject, long viewerCode, long categoryId, string previewImageUrl = null, IEnumerable<Tag> tags = null, int? participantCount = null);
+
+        Discussion Update(Discussion discussion);
     }
 }

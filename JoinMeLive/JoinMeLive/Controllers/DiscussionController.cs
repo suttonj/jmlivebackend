@@ -4,6 +4,7 @@ using System.Web.Http.Cors;
 
 using JoinMeLive.DAL.Models;
 using JoinMeLive.Helpers;
+using JoinMeLive.Models;
 
 namespace JoinMeLive.Controllers
 {
@@ -12,9 +13,12 @@ namespace JoinMeLive.Controllers
     {
         private readonly IDiscussionHelper discussionHelper;
 
-        public DiscussionController(IDiscussionHelper discussionHelper)
+        private readonly ITagHelper tagHelper;
+
+        public DiscussionController(IDiscussionHelper discussionHelper, ITagHelper tagHelper)
         {
             this.discussionHelper = discussionHelper;
+            this.tagHelper = tagHelper;
         }
 
         /// <summary>
@@ -48,7 +52,7 @@ namespace JoinMeLive.Controllers
             int? startResult = 0,
             string q = null)
         {
-            var discussions = this.discussionHelper.List(categoryId, StringToLongList(tagIds), maxResults, startResult, q);
+            var discussions = this.discussionHelper.List(categoryId, this.StringToLongList(tagIds), maxResults, startResult, q);
 
             return this.Ok(discussions);
         }
@@ -56,21 +60,21 @@ namespace JoinMeLive.Controllers
         /// <summary>
         /// Start a new discussion.
         /// </summary>
-        /// <param name="subject">Subject for the new discussion</param>
-        /// <param name="viewerCode">join.me viewer code used to join the discussion</param>
-        /// <param name="categoryId">Lowest level category for the duscission</param>
-        /// <param name="tagIds">(optional) comma seperated tag ids to use for the discussion</param>
-        /// <param name="participantCount">the count of participants - this is for inserting test data</param>
+        /// <param name="model">
+        /// subject - Subject for the new discussion
+        /// viewerCode - join.me viewer code used to join the discussion
+        /// categoryId -Lowest level category for the duscission
+        /// previewImageUrl - The image which will be used as the preview image in the UI
+        /// tags - (optional) comma seperated tags (as string) to use for the discussion
+        /// participantCount - the count of participants - this is for inserting test data
+        /// </param>
         /// <returns>The newly created discussion</returns>
         [HttpPost]
-        public IHttpActionResult Insert(
-            string subject,
-            long viewerCode,
-            long categoryId,
-            string tagIds = null,
-            int? participantCount = null)
+        public IHttpActionResult Insert([FromBody] InsertDiscussionModel model)
         {
-            Discussion discussion = this.discussionHelper.Insert(subject, viewerCode, categoryId, this.StringToLongList(tagIds), participantCount);
+            IEnumerable<Tag> tagObjects = string.IsNullOrWhiteSpace(model.Tags) ? new Tag[0] : this.tagHelper.GetOrInsertTags(model.Tags.Split(','));
+
+            Discussion discussion = this.discussionHelper.Insert(model.Subject, model.ViewerCode, model.CategoryId, model.PreviewImageUrl, tagObjects, model.ParticipantCount);
 
             return this.Ok(discussion);
         }

@@ -77,6 +77,7 @@ namespace JoinMeLive
             kernel.Bind<IDiscussionHelper>().To<DiscussionHelper>().InRequestScope();
             kernel.Bind<ITagHelper>().To<TagHelper>().InRequestScope();
             kernel.Bind<IUserHelper>().To<UserHelper>().InRequestScope();
+            kernel.Bind<IUserTagHelper>().To<UserTagHelper>().InRequestScope();
         }
     }
 }

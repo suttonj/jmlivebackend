@@ -55,6 +55,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\DbContextExtensions.cs" />
+    <Compile Include="Extensions\DbSetExtensions.cs" />
     <Compile Include="Extensions\DiscussionExtensions.cs" />
     <Compile Include="Extensions\RandomExtensions.cs" />
     <Compile Include="Extensions\TagExtensions.cs" />
@@ -72,8 +74,13 @@
     <Compile Include="Migrations\201512072213383_UsersAdded.Designer.cs">
       <DependentUpon>201512072213383_UsersAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201512081925238_PreviewImageInDB.cs" />
+    <Compile Include="Migrations\201512081925238_PreviewImageInDB.Designer.cs">
+      <DependentUpon>201512081925238_PreviewImageInDB.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\IIdsEqual.cs" />
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Models\Discussion.cs" />
     <Compile Include="Models\User.cs" />
@@ -92,6 +99,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201512072213383_UsersAdded.resx">
       <DependentUpon>201512072213383_UsersAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201512081925238_PreviewImageInDB.resx">
+      <DependentUpon>201512081925238_PreviewImageInDB.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

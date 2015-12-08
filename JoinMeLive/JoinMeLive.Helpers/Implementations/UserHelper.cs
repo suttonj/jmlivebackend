@@ -41,5 +41,32 @@ namespace JoinMeLive.Helpers.Implementations
 
             return user;
         }
+
+        public User Update(long userId, string displayName, string photoUrl, string selfSummary)
+        {
+            User user = this.liveContext.Users.SingleOrDefault(x => x.Id == userId);
+            if (user == null)
+            {
+                throw new ArgumentException("There is no user with the id given");
+            }
+
+            if (!string.IsNullOrWhiteSpace(displayName))
+            {
+                user.DisplayName = displayName;
+            }
+
+            if (!string.IsNullOrWhiteSpace(photoUrl))
+            {
+                user.PhotoUrl = photoUrl;
+            }
+
+            if (!string.IsNullOrWhiteSpace(selfSummary))
+            {
+                user.SelfSummary = selfSummary;
+            }
+
+            this.liveContext.SaveChanges();
+            return user;
+        }
     }
 }

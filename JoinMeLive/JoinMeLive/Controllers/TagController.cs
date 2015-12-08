@@ -3,6 +3,7 @@ using System.Web.Http.Cors;
 
 using JoinMeLive.DAL.Models;
 using JoinMeLive.Helpers;
+using JoinMeLive.Models;
 
 namespace JoinMeLive.Controllers
 {
@@ -34,12 +35,12 @@ namespace JoinMeLive.Controllers
         /// <summary>
         /// Create a new tag.
         /// </summary>
-        /// <param name="tagName">Name for the desired tag.</param>
+        /// <param name="model">tagName - Name for the desired tag.</param>
         /// <returns>The newly created tag</returns>
         [HttpPost]
-        public IHttpActionResult Insert(string tagName)
+        public IHttpActionResult Insert([FromBody] InsertTagModel model)
         {
-            Tag tag = this.tagHelper.Insert(tagName);
+            Tag tag = this.tagHelper.Insert(model.TagName);
 
             return this.Ok(tag);
         }
