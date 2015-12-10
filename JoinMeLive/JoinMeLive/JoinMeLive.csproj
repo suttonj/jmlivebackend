@@ -175,6 +175,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\FavoriteUserTagModel.cs" />
     <Compile Include="Models\InsertCategoryModel.cs" />
     <Compile Include="Models\InsertDiscussionModel.cs" />
     <Compile Include="Models\InsertTagModel.cs" />

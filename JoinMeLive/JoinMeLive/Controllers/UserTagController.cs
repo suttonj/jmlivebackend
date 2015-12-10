@@ -2,6 +2,7 @@
 using System.Web.Http.Cors;
 
 using JoinMeLive.Helpers;
+using JoinMeLive.Models;
 
 namespace JoinMeLive.Controllers
 {
@@ -31,13 +32,15 @@ namespace JoinMeLive.Controllers
         /// <summary>
         /// Add a new tag to the user's list of favorites
         /// </summary>
-        /// <param name="userId">User Id</param>
-        /// <param name="tagId">The tag Id to favorite</param>
+        /// <param name="model">
+        /// userId - User Id
+        /// tagId -The tag Id to favorite
+        /// </param>
         /// <returns>List of all the user's current favorite tags</returns>
         [HttpPost]
-        public IHttpActionResult Favorite(long userId, long tagId)
+        public IHttpActionResult Favorite([FromBody] FavoriteUserTagModel model)
         {
-            var tags = this.userTagHelper.Favorite(userId, tagId);
+            var tags = this.userTagHelper.Favorite(model.UserId, model.TagId);
 
             return this.Ok(tags);
         }
@@ -45,13 +48,15 @@ namespace JoinMeLive.Controllers
         /// <summary>
         /// Remove a tag from the user's list of favorites
         /// </summary>
-        /// <param name="userId">User Id</param>
-        /// <param name="tagId">The tag Id to unfavorite</param>
+        /// <param name="model">
+        /// userId - User Id
+        /// tagId -The tag Id to unfavorite
+        /// </param>
         /// <returns>List of all the user's current favorite tags</returns>
         [HttpDelete]
-        public IHttpActionResult Unfavorite(long userId, long tagId)
+        public IHttpActionResult Unfavorite([FromBody] FavoriteUserTagModel model)
         {
-            var tags = this.userTagHelper.Unfavorite(userId, tagId);
+            var tags = this.userTagHelper.Unfavorite(model.UserId, model.TagId);
 
             return this.Ok(tags);
         }
