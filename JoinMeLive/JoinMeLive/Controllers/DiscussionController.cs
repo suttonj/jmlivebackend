@@ -74,7 +74,12 @@ namespace JoinMeLive.Controllers
         {
             IEnumerable<Tag> tagObjects = string.IsNullOrWhiteSpace(model.Tags) ? new Tag[0] : this.tagHelper.GetOrInsertTags(model.Tags.Split(','));
 
-            Discussion discussion = this.discussionHelper.Insert(model.Subject, model.ViewerCode, model.CategoryId, model.PreviewImageUrl, tagObjects, model.ParticipantCount);
+            if (string.IsNullOrEmpty(model.PreviewImageUrl))
+            {
+                model.PreviewImageUrl = "https://s-media-cache-ak0.pinimg.com/236x/ee/6d/ce/ee6dceb75e4dbed449ac279e262180dc.jpg";
+            }
+
+            Discussion discussion = this.discussionHelper.Insert(model.Subject, model.ViewerCode, model.CategoryId ?? 119, model.PreviewImageUrl, tagObjects, model.ParticipantCount);
 
             return this.Ok(discussion);
         }

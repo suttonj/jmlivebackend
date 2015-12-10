@@ -12,7 +12,7 @@ namespace JoinMeLive.Models
 
         public long ViewerCode { get; set; }
 
-        public long CategoryId { get; set; }
+        public long? CategoryId { get; set; }
 
         public string PreviewImageUrl { get; set; }
 
